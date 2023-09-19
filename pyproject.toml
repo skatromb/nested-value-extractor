@@ -1,0 +1,19 @@
+[project]
+name = "nested-dict-extractor"
+version = "0.1"
+authors = [{ name="Ivan Livadnyi", email="morales_lamb_0y@icloud.com" },]
+description = "Derive nested value from dict by providing sequence of keys"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = []
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+]
+
+[build-system]
+requires = ["setuptools >= 68.2"]
+build-backend = "setuptools.build_meta"
+
+[project.urls]
+"Homepage" = "https://github.com/skatromb/nested-dict-extractor"
