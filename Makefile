@@ -1,16 +1,15 @@
 all-setup: venv pre-commit-install install-pytest
 
-
-all-upload-test: test build pypi-upload-test clean-dist
+all-upload-test: clean-dist test build pypi-upload-test clean-dist
 pypi-upload-test:
 	$(with_venv) && \
 	python3 -m twine upload --repository testpypi dist/*
 
 
-all-upload-prod: test build pypi-upload-prod clean-dist
+all-upload-prod: clean-dist test build pypi-upload-prod clean-dist
 pypi-upload-prod:
-	python3 -m twine upload dist/* && \
-	rm -rf dist
+	$(with_venv) && \
+	python3 -m twine upload dist/*
 
 
 with_venv := source venv/bin/activate
