@@ -1,10 +1,9 @@
 import pytest
 
-from src.nested_dict_extractor import extract_nested_value, KeyNestedError
+from src.nested_dict_extractor import KeyNestedError, extract_nested_value
 
 
 class TestExtractNestedValue:
-
     #  Extracts a nested value from a dictionary with a single key.
     def test_extract_nested_value_single_key(self):
         from_dict = {1: 2}

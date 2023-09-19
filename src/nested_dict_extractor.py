@@ -30,10 +30,8 @@ def extract_nested_value(
     _initial_from_dict, _initial_keys = from_dict, keys
     if not issubclass(type(keys), Sequence):
         raise ValueError(f"Keys parameter '{keys}' is not a Sequence")
-    if any(
-            not issubclass(type(key), Hashable) for key in keys
-    ):
-        raise ValueError(f"Some of the keys are not hashable objects")
+    if any(not issubclass(type(key), Hashable) for key in keys):
+        raise ValueError("Some of the keys are not hashable objects")
     return _extract(from_dict, keys, strict, _initial_from_dict, _initial_keys)
 
 
@@ -65,8 +63,12 @@ def _extract(
             except KeyError:
                 raise KeyNestedError(
                     f"Error traversing '{_initial_from_dict}' with keys '{_initial_keys}'. "
-                    + (f"There are no key '{key}' in nested '{from_dict}' element. " if (from_dict, key) != (_initial_from_dict, _initial_keys) else "")
-                    + f"Turn off 'strict' mode if you want to silence the exception"
+                    + (
+                        f"There are no key '{key}' in nested '{from_dict}' element. "
+                        if (from_dict, key) != (_initial_from_dict, _initial_keys)
+                        else ""
+                    )
+                    + "Turn off 'strict' mode if you want to silence the exception"
                 )
         else:
             raise ValueError(

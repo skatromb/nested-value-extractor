@@ -1,5 +1,5 @@
 # nested-dict-extractor
-Derives nested value from dict by providing sequence of keys. 
+Derives nested value from dict by providing sequence of keys.
 
 Returns `None` if nested value wasn't found or throws an Exception if `strict=True`
 
