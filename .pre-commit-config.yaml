@@ -1,0 +1,59 @@
+# Look docs here https://github.com/asottile/pyupgrade/blob/main/README.md
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.4.0
+    hooks:
+      - id: detect-private-key
+      - id: end-of-file-fixer
+      - id: pretty-format-json
+      - id: trailing-whitespace
+
+  # Black is the uncompromising Python code formatter. "Any color you like"
+  - repo: https://github.com/psf/black
+    rev: 23.9.1
+    hooks:
+      - id: black
+
+  # An extremely fast Python linter, written in Rust
+  - repo: https://github.com/charliermarsh/ruff-pre-commit
+    # Ruff version.
+    rev: v0.0.290
+    hooks:
+      - id: ruff
+        # ignore:
+        #  E501 "line too long > 79 characters",
+        args: ["--ignore=E501"]
+
+  # Flake8 is a wrapper around these tools:
+  #  PyFlakes
+  #  pycodestyle
+  #  Ned Batchelder's McCabe script
+  - repo: https://github.com/pycqa/flake8
+    rev: 6.1.0
+    hooks:
+      - id: flake8
+        args:
+          # ignore
+          #  E501 "Line too long > 79 characters",
+          #  W503 "Line break occurred before a binary operator"
+          - "--ignore=E501,W503"
+
+  # Pyupgrade is a tool (and pre-commit hook) to automatically upgrade syntax for newer versions of the language
+  - repo: https://github.com/asottile/pyupgrade
+    rev: v3.11.0
+    hooks:
+      - id: pyupgrade
+        args: [--py310-plus]
+
+  # isort your imports, so you don't have to.
+  - repo: https://github.com/pycqa/isort
+    rev: 5.12.0
+    hooks:
+      - id: isort
+        args: ["--profile", "black", "--filter-files"]
+
+  # Mypy is a static type checker for Python
+  - repo: https://github.com/pre-commit/mirrors-mypy
+    rev: v1.5.1
+    hooks:
+      - id: mypy

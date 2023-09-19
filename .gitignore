@@ -3,3 +3,5 @@
 /dist/
 /tests/.pytest_cache/
 /venv/
+/.ruff_cache/
+/.pytest_cache/
