@@ -1,0 +1,5 @@
+.idea/
+
+/dist/
+/tests/.pytest_cache/
+/venv/
