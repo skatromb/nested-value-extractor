@@ -23,7 +23,9 @@ None
 {1: 2}
 
 >>> extract_nested_value({1: 2}, ["a"], strict=True)
-
+raise KeyNestedError("Error traversing '{1: 2}' with keys '['a']'.
+There are no key 'a' in nested '{1: 2}' element.
+Turn off 'strict' mode if you want to silence the exception")
 ```
 
 ### Arguments
@@ -32,7 +34,7 @@ None
 `strict`: prevents throwing an exception when keys are not exist in nested dict if True
 
 ### Returns
-Nested value if all keys are exists, or None
+Nested value if all chain of keys exists, or `None`
 
 ### Development
 Look at [Makefile](./Makefile)
