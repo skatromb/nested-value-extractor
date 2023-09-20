@@ -3,12 +3,12 @@
 "value
 ```
 
-Derives a nested value from dict by specifying a sequence of keys.
+Extracts a nested value from a json-like dict by specifying a sequence of keys.
 
-May be useful to avoid a `KeyError` exception when parsing JSON with a dynamic nested structure,
-when you know the JSON paths of elements, but are unsure whether elements exist.
+May be useful to avoid a `KeyError` exception when accessing JSON-like dicts with a dynamic nested structure,
+when you know the keys paths of elements, but are unsure whether elements exist.
 
-Returns nested value or `None` if it wasn't found. If you want to force throwing exceptions, pass `strict=True`.
+Returns nested value or `None` if it wasn't found. Could throw `KeyError` exception, when `strict=True` is passed.
 
 
 
@@ -27,7 +27,7 @@ None
 {1: 2}
 
 >>> extract_nested_value({1: 2}, ["a"], strict=True)
-raise KeyNestedError("Error traversing '{1: 2}' with keys '['a']'.
+KeyError("Error traversing '{1: 2}' with keys '['a']'.
 There are no key 'a' in nested '{1: 2}' element.
 Turn off 'strict' mode if you want to silence the exception")
 ```
@@ -42,3 +42,4 @@ Nested value, if the entire chain of keys is present, or `None`
 
 ### Development
 Look at [Makefile](./Makefile)
+# TODO: make nested-value-extractor
