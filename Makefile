@@ -1,5 +1,9 @@
 all-setup: venv pre-commit-install install-pytest
 
+test:
+	$(with_venv) && \
+	python3 -m pytest
+
 all-upload-test: clean-dist test build pypi-upload-test clean-dist
 pypi-upload-test:
 	$(with_venv) && \
@@ -20,9 +24,6 @@ pre-commit-install:
 install-pytest: venv
 	$(with_venv) && \
 	pip install pytest
-test:
-	$(with_venv) && \
-	python3 -m pytest
 build:
 	$(with_venv) && \
 	pip install --upgrade build twine && \
