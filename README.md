@@ -33,9 +33,9 @@ Turn off 'strict' mode if you want to silence the exception")
 ```
 
 ### Arguments
-- `from_dict`: dict from which the nested value is extracted
+- `from_obj`: json-like dict from which the nested value should be extracted
 - `keys`: ordered sequence of keys to derive the nested value
-- `strict`: prevents throwing an exception when keys are not exist in nested dict if True
+- `strict`: by default False. That prevents throwing an exception when keys are not exist in nested object
 
 ### Returns
 Nested value, if the entire chain of keys is present, or `None`
