@@ -29,17 +29,12 @@ def extract_nested_value(from_obj: dict, keys: Sequence[Hashable], strict=False)
 
     else:  # strict
         for key in keys:
-            if isinstance(nested_obj, str):
+            if isinstance(nested_obj, str) or not hasattr(nested_obj, "__getitem__"):
                 raise KeyError(
-                    f"Reached 'str' nested object '{nested_obj}' "
-                    f"in object '{from_obj}' while looking for keys '{keys}'"
+                    "Keys sequence '{keys}' do not exists in object '{from_obj}'".format(
+                        keys=keys, from_obj=from_obj
+                    )
                 )
-            else:
-                try:
-                    nested_obj = nested_obj[key]
-                except KeyError as key_error:
-                    raise KeyError(
-                        f"Keys sequence '{keys}' do not exists in object '{from_obj}'"
-                    ) from key_error
+            nested_obj = nested_obj[key]
 
     return nested_obj
