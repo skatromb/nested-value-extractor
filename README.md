@@ -32,11 +32,11 @@ KeyError: "Keys sequence '["a"]' do not exists in object '{1: 2}'")
 ### Arguments
 - `from_obj`: JSON-like dict from which the nested value should be extracted
 - `keys`: ordered sequence of keys to derive the nested value
-- `strict`: (default `False`) prevents throwing an exception when keys are not exist in nested object when set to `False`.
-  Throws `KeyError` exception if set to True and key wasn't found.
+- `strict`: (default False) prevents throwing an exception when keys are not exist in nested object when set to False.
+  Throws KeyError exception if set to True and key wasn't found.
 
 ### Returns
-Nested value, if the entire chain of keys is present, or `None`
+Nested value, if the entire chain of keys is present, or None
 
 ### Development
 Look at [Makefile](./Makefile)
