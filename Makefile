@@ -1,13 +1,11 @@
-all-setup: venv pre-commit-install install-pytest
-
 test:
-	$(with_venv) && \
-	python3 -m pytest
+	$(with_venv) && python3 -m pytest
 
 all-upload-test: clean-dist test build pypi-upload-test clean-dist
 
 all-upload-prod: clean-dist test build pypi-upload-prod clean-dist
 
+all-setup: venv pre-commit-install install-pytest
 
 with_venv := source venv/bin/activate
 venv:
