@@ -1,6 +1,6 @@
 [project]
 name = "nested-value-extractor"
-version = "0.1"
+version = "0.1.1"
 authors = [{ name="Ivan Livadnyi", email="morales_lamb_0y@icloud.com" },]
 description = "Extract nested value from json-like dict by providing sequence of keys"
 readme = "README.md"
