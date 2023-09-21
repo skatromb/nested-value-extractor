@@ -35,6 +35,7 @@ KeyError: "Keys sequence '["a"]' do not exists in object '{1: 2}'")
 - `strict`: (default False) prevents throwing an exception when keys are not exist in nested object when set to False.
   Throws KeyError exception if set to True and key wasn't found.
 
+
 ### Returns
 Nested value, if the entire chain of keys is present, or None
 
