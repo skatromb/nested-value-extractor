@@ -3,21 +3,27 @@ from collections.abc import Hashable, Sequence
 from typing import Any
 
 
-def extract_nested_value(from_obj: dict, keys: Sequence[Hashable], safe=True) -> Any:
+def extract_nested_value(
+    from_obj: dict,
+    keys: Sequence[Hashable],
+    safe=True,
+) -> Any:
     """
     Extract a nested value from a json-like dictionary object.
 
     Args:
         from_obj: The json-like dictionary to extract the nested value from.
         keys: A sequence of keys to traverse the nested structure.
-        safe: When set to True, returns None in case of absence the sequence of keys in a nested structure
+        safe: When set to True, returns None
+            in case of absence the sequence of keys in a nested structure
             When set to False, raises a KeyError in such a case
 
     Returns:
         Any: The nested value, or None if it could not be found.
 
     Raises:
-        KeyError: when `safe_mode` is False and the sequence of keys is absent in a nested structure
+        KeyError: when `safe_mode` is False
+            and the sequence of keys is absent in a nested structure
     """
     nested_obj: Any = from_obj
 
@@ -34,14 +40,12 @@ def extract_nested_value(from_obj: dict, keys: Sequence[Hashable], safe=True) ->
             not_indexable = not hasattr(nested_obj, '__getitem__')
             if string or not_indexable:
                 raise KeyError(
-                    'Keys sequence "{keys}" do not exists in object "{from_obj}"'.format(
+                    ('Keys sequence "{keys}" do not exists ' +
+                     'in object "{from_obj}"'
+                     ).format(
                         keys=keys, from_obj=from_obj,
                     ),
                 )
             nested_obj = nested_obj[key]
 
     return nested_obj
-
-
-# def _extract_safely():
-#     ...

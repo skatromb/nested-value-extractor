@@ -26,13 +26,8 @@ repos:
     rev: 6.1.0
     hooks:
       - id: flake8
-#        additional_dependencies: ["wemake-python-styleguide"]
-        args:
-          # ignore
-          #  E501 "Line too long > 79 characters",
-          #  W503 "Line break occurred before a binary operator"
-          #  RST201,RST203,RST301 are for Google Docstrings
-          - "--ignore=E501,W503,RST201,RST203,RST301"
+        additional_dependencies: ["wemake-python-styleguide"]
+        args: [--config, setup.cfg]
 
   # Pyupgrade is a tool (and pre-commit hook) to automatically upgrade syntax for newer versions of the language
   - repo: https://github.com/asottile/pyupgrade
