@@ -37,7 +37,7 @@ def extract_nested_value(
     else:  # strict
         for key in keys:
             string = isinstance(nested_obj, str)
-            not_indexable = not hasattr(nested_obj, "__getitem__")
+            not_indexable = not hasattr(nested_obj, '__getitem__')
             if string or not_indexable:
                 raise KeyError(
                     ('Keys sequence "{keys}" do not exists ' +
