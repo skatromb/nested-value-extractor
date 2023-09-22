@@ -40,10 +40,9 @@ def extract_nested_value(
             not_indexable = not hasattr(nested_obj, "__getitem__")
             if string or not_indexable:
                 raise KeyError(
-                    (
-                        'Keys sequence "{keys}" do not exists '
-                        + 'in object "{from_obj}"'
-                    ).format(keys=keys, from_obj=from_obj),
+                    ('Keys sequence "{keys}" do not exists ' +
+                     'in object "{from_obj}"'
+                     ).format(keys=keys, from_obj=from_obj),
                 )
             nested_obj = nested_obj[key]
 
