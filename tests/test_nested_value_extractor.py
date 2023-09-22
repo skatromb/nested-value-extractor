@@ -64,7 +64,7 @@ class TestExtractNestedValue:
 
         assert result == expected
 
-    #  Returns None when a non-existent key is provided in a non-strict mode.
+    #  Returns None when a non-existent key is provided in a non-safe mode.
     def test_extract_nested_value_nonexistent_key_nonstrict(self):
         from_obj = {1: 2}
         keys = ["a"]
@@ -74,32 +74,32 @@ class TestExtractNestedValue:
 
         assert result == expected
 
-    #  Raises a NonDictNestedError when a non-existent key is provided in a strict mode.
+    #  Raises a NonDictNestedError when a non-existent key is provided in a safe mode.
     def test_extract_nested_value_nonexistent_key_strict(self):
         from_obj = {1: 2}
         keys = ["a"]
-        strict = True
+        safe = False
 
         with pytest.raises(KeyError):
-            extract_nested_value(from_obj, keys, strict=strict)
+            extract_nested_value(from_obj, keys, safe=safe)
 
-    #  Raises a KeyError when a non-dict value is encountered while traversing the nested dictionary in strict mode.
+    #  Raises a KeyError when a non-dict value is encountered while traversing the nested dictionary in safe mode.
     def test_extract_nested_value_non_dict_value_strict(self):
         from_obj = {1: "value"}
         keys = [1, 2]
-        strict = True
+        safe = False
 
         with pytest.raises(KeyError):
-            extract_nested_value(from_obj, keys, strict=strict)
+            extract_nested_value(from_obj, keys, safe=safe)
 
-    #  Raises a KeyError when len(keys) is more than nesting of a dict in a strict mode.
+    #  Raises a KeyError when len(keys) is more than nesting of a dict in a safe mode.
     def test_extract_nested_value_too_long_keys_strict(self):
         from_obj = {1: {2: "value"}}
         keys = [1, 2, 3]
-        strict = True
+        safe = False
 
         with pytest.raises(KeyError):
-            extract_nested_value(from_obj, keys, strict=strict)
+            extract_nested_value(from_obj, keys, safe=safe)
 
     #  Returns None when a non-dict value is provided as the input dictionary.
     def test_extract_nested_value_non_dict_input(self):
@@ -111,14 +111,14 @@ class TestExtractNestedValue:
 
         assert result == expected
 
-    #  Raises KeyError when a non-dict value is provided as the input dictionary in strict mode.
+    #  Raises KeyError when a non-dict value is provided as the input dictionary in safe mode.
     def test_extract_nested_value_non_dict_input_strict(self):
         from_obj = "not a dict"
         keys = [1, 2, 3]
-        strict = True
+        safe = False
 
         with pytest.raises(KeyError):
-            extract_nested_value(from_obj, keys, strict=strict)
+            extract_nested_value(from_obj, keys, safe=safe)
 
     #  Raises TypeError when a non-sequence object is provided as the input keys.
     def test_extract_nested_value_non_sequence_keys(self):
