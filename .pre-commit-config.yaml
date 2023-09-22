@@ -8,6 +8,12 @@ repos:
       - id: pretty-format-json
       - id: trailing-whitespace
 
+  # Black is the uncompromising Python code formatter. "Any color you like"
+  - repo: https://github.com/psf/black
+    rev: 23.9.1
+    hooks:
+      - id: black
+
   # An extremely fast Python linter, written in Rust
   - repo: https://github.com/charliermarsh/ruff-pre-commit
     # Ruff version.
