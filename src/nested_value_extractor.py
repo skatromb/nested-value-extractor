@@ -42,9 +42,7 @@ def extract_nested_value(
                 raise KeyError(
                     ('Keys sequence "{keys}" do not exists ' +
                      'in object "{from_obj}"'
-                     ).format(
-                        keys=keys, from_obj=from_obj,
-                    ),
+                     ).format(keys=keys, from_obj=from_obj),
                 )
             nested_obj = nested_obj[key]
 
