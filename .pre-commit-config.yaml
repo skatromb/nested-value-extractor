@@ -13,7 +13,6 @@ repos:
     rev: 23.9.1
     hooks:
       - id: black
-        args: ["--line-length=100"]
 
   # An extremely fast Python linter, written in Rust
   - repo: https://github.com/charliermarsh/ruff-pre-commit
@@ -33,11 +32,8 @@ repos:
     rev: 6.1.0
     hooks:
       - id: flake8
-        args:
-          # ignore
-          #  E501 "Line too long > 79 characters",
-          #  W503 "Line break occurred before a binary operator"
-          - "--ignore=E501,W503"
+        additional_dependencies: ["wemake-python-styleguide"]
+        args: [--config, setup.cfg]
 
   # Pyupgrade is a tool (and pre-commit hook) to automatically upgrade syntax for newer versions of the language
   - repo: https://github.com/asottile/pyupgrade
