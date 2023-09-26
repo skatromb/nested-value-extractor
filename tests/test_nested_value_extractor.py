@@ -1,141 +1,62 @@
-"""Tests for nested_value_extractor"""
+"""Tests for nested_value_extractor."""
+from typing import Any
+
 import pytest
 
-from src.nested_value_extractor import extract_nested_value
+from src.nested_value_extractor import Keys, extract_nested_value
+
+NON_HAPPY_ARGS = (
+    ({1: "string shouldn't be indexed"}, [1, 2]),
+    ({1: 2}, [1, 'end of nesting reached']),
+    ({1: 2}, ['non existent key']),
+    (1, ['non-indexable object']),
+)
 
 
-class TestExtractNestedValue:
-    """Test suite for nested_value_extractor"""
+@pytest.mark.parametrize('safe', [True, False])
+@pytest.mark.parametrize(
+    'from_obj, keys, expected',
+    [
+        ({1: '1-st level value'}, [1], '1-st level value'),
+        ({1: {2: {3: '3-rd level value'}}}, [1, 2, 3], '3-rd level value'),
+        ({'no keys in': 'same dict out'}, [], {'no keys in': 'same dict out'}),
+    ],
+)
+def test_happy_ways(
+    from_obj: dict,
+    keys: Keys,
+    safe: bool,
+    expected: Any,
+) -> None:
+    """Tests happy ways."""
+    assert extract_nested_value(from_obj, keys, safe) == expected
 
-    def test_extract_nested_value_single_key(self):
-        """Extracts a nested value from a dictionary with a single key."""
-        from_obj = {1: 2}
-        keys = [1]
-        expected = 2
 
-        result = extract_nested_value(from_obj, keys)
+@pytest.mark.parametrize(
+    'from_obj, keys, expected',
+    [(*args, None) for args in NON_HAPPY_ARGS],
+)
+def test_not_found_safe(
+    from_obj: dict,
+    keys: Keys,
+    expected: Any,
+) -> None:
+    """Tests cases when keys sequence is not found."""
+    assert extract_nested_value(from_obj, keys) is expected
 
-        assert result == expected
 
-    def test_extract_nested_value_multiple_keys(self):
-        """Extracts a nested value from a dictionary with multiple keys."""
-        from_obj = {1: {2: {3: "value"}}}
-        keys = [1, 2, 3]
-        expected = "value"
-
-        result = extract_nested_value(from_obj, keys)
-
-        assert result == expected
-
-    def test_extract_nested_value_empty_keys(self):
-        """Returns the original dictionary when an empty list of keys is provided."""
-        from_obj = {1: 2}
-        keys = []
-        expected = from_obj
-
-        result = extract_nested_value(from_obj, keys)
-
-        assert result == expected
-
-    def test_extract_nested_value_int_indexing(self):
-        """Results in `None` when ending with `int`."""
-        from_obj = {1: 2}
-        keys = [1, 2]
-        expected = None
-
-        result = extract_nested_value(from_obj, keys)
-
-        assert result == expected
-
-    def test_extract_nested_value_non_dict_value(self):
-        """Returns None when a ending with `str`."""
-        from_obj = {1: "value"}
-        keys = [1, 2]
-        expected = None
-
-        result = extract_nested_value(from_obj, keys)
-
-        assert result == expected
-
-    def test_extract_nested_value_str_indexing(self):
-        """Returns `None` when ending with `list`."""
-        from_obj = {1: [1, 2]}
-        keys = [1, 0]
-        expected = None
-
-        result = extract_nested_value(from_obj, keys)
-
-        assert result == expected
-
-    def test_extract_nested_value_nonexistent_key_nonstrict(self):
-        """Returns None when a non-existent key is provided in a non-safe mode."""
-        from_obj = {1: 2}
-        keys = ["a"]
-        expected = None
-
-        result = extract_nested_value(from_obj, keys)
-
-        assert result == expected
-
-    def test_extract_nested_value_nonexistent_key_strict(self):
-        """Raises a NonDictNestedError when a non-existent key is provided in a safe mode."""
-        from_obj = {1: 2}
-        keys = ["a"]
-        safe = False
-
-        with pytest.raises(KeyError):
-            extract_nested_value(from_obj, keys, safe=safe)
-
-    def test_extract_nested_value_non_dict_value_strict(self):
-        """Raises a KeyError when a non-dict value is encountered while traversing the nested dictionary in safe mode."""
-        from_obj = {1: "value"}
-        keys = [1, 2]
-        safe = False
-
-        with pytest.raises(KeyError):
-            extract_nested_value(from_obj, keys, safe=safe)
-
-    def test_extract_nested_value_too_long_keys_strict(self):
-        """Raises a KeyError when len(keys) is more than nesting of a dict in a safe mode."""
-        from_obj = {1: {2: "value"}}
-        keys = [1, 2, 3]
-        safe = False
-
-        with pytest.raises(KeyError):
-            extract_nested_value(from_obj, keys, safe=safe)
-
-    def test_extract_nested_value_non_dict_input(self):
-        """Returns None when a non-dict value is provided as the input dictionary."""
-        from_obj = "not a dict"
-        keys = [1, 2, 3]
-        expected = None
-
-        result = extract_nested_value(from_obj, keys)
-
-        assert result == expected
-
-    def test_extract_nested_value_non_dict_input_strict(self):
-        """Raises KeyError when a non-dict value is provided as the input dictionary in safe mode."""
-        from_obj = "not a dict"
-        keys = [1, 2, 3]
-        safe = False
-
-        with pytest.raises(KeyError):
-            extract_nested_value(from_obj, keys, safe=safe)
-
-    def test_extract_nested_value_non_sequence_keys(self):
-        """Raises TypeError when a non-sequence object is provided as the input keys."""
-        from_obj = {1: 2}
-        keys = 100
-        expected = None
-
-        with pytest.raises(TypeError):
-            extract_nested_value(from_obj, keys, expected)
-
-    def test_extract_nested_value_non_hashable_key(self):
-        """Raises TypeError when any key in keys is unhashable."""
-        from_obj = {1: 2}
-        keys = [[1]]
-
-        with pytest.raises(TypeError):
-            extract_nested_value(from_obj, keys)
+@pytest.mark.parametrize('safe', [False])
+@pytest.mark.parametrize(
+    'from_obj, keys, expected_exception',
+    [({1: 'nested key fail'}, [[1]], pytest.raises(TypeError))] +
+    [(*args, pytest.raises(KeyError)) for args in NON_HAPPY_ARGS],
+)
+def test_exceptions(
+    from_obj: dict,
+    keys: Keys,
+    safe: bool,
+    expected_exception: pytest.ExceptionInfo,
+):
+    """Tests cases when keys sequence is not found and exception is thrown."""
+    with expected_exception:
+        extract_nested_value(from_obj, keys, safe)
