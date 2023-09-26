@@ -5,11 +5,11 @@ all-upload-test: clean-dist test build pypi-upload-test clean-dist
 
 all-upload-prod: clean-dist test build pypi-upload-prod clean-dist
 
-all-setup: venv pre-commit-install install-pytest
+all-setup: .venv pre-commit-install install-pytest
 
-with_venv := source venv/bin/activate
-venv:
-	python3 -m venv venv
+with_venv := source .venv/bin/activate
+.venv:
+	python3 -m venv .venv
 pypi-upload-test:
 	$(with_venv) && \
 	python3 -m twine upload --repository testpypi dist/*
@@ -18,7 +18,7 @@ pypi-upload-prod:
 	python3 -m twine upload dist/*
 pre-commit-install:
 	pre-commit install
-install-pytest: venv
+install-pytest: .venv
 	$(with_venv) && \
 	pip install pytest
 build:
