@@ -14,20 +14,14 @@ repos:
     rev: v0.0.290
     hooks:
       - id: ruff
-        # ignore:
-        #  E501 "line too long > 79 characters",
-        args: ["--ignore=E501"]
+        args:  [--fix, --exit-non-zero-on-fix]
 
   # Flake8 is a wrapper around these tools:
-  #  PyFlakes
-  #  pycodestyle
-  #  Ned Batchelder's McCabe script
   - repo: https://github.com/pycqa/flake8
     rev: 6.1.0
     hooks:
       - id: flake8
         additional_dependencies: ["wemake-python-styleguide"]
-        args: [--config, setup.cfg]
 
   # Pyupgrade is a tool (and pre-commit hook) to automatically upgrade syntax for newer versions of the language
   - repo: https://github.com/asottile/pyupgrade
@@ -41,7 +35,6 @@ repos:
     rev: 5.12.0
     hooks:
       - id: isort
-        args: ["--profile", "black", "--filter-files"]
 
   # Mypy is a static type checker for Python
   - repo: https://github.com/pre-commit/mirrors-mypy
