@@ -21,7 +21,7 @@ repos:
     rev: 6.1.0
     hooks:
       - id: flake8
-        additional_dependencies: ["wemake-python-styleguide"]
+        additional_dependencies: [wemake-python-styleguide, flake8-pytest-style]
 
   # Pyupgrade is a tool (and pre-commit hook) to automatically upgrade syntax for newer versions of the language
   - repo: https://github.com/asottile/pyupgrade
