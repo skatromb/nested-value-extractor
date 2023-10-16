@@ -21,7 +21,7 @@ pre-commit-install:
 	pre-commit install
 install-deps: venv
 	$(with_venv) && \
-	pip install -r requirements.dev.txt
+	pip install --upgrade -r requirements.dev.txt
 build:
 	$(with_venv) && \
 	python -m build && \
