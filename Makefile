@@ -22,7 +22,7 @@ pre-commit-install:
 	pip install pre-commit && pre-commit install-hooks
 install-deps: venv
 	$(with_venv) && \
-	pip install -r requirements.dev.txt
+	pip install --upgrade -r requirements.dev.txt
 build:
 	$(with_venv) && \
 	pip install --upgrade build twine && \
