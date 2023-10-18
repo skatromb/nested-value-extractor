@@ -8,6 +8,12 @@ repos:
       - id: pretty-format-json
       - id: trailing-whitespace
 
+  # Markdown linter
+  - repo: https://github.com/igorshubovych/markdownlint-cli
+    rev: v0.37.0
+    hooks:
+    - id: markdownlint
+
   # An extremely fast Python linter, written in Rust
   - repo: https://github.com/charliermarsh/ruff-pre-commit
     # Ruff version.
