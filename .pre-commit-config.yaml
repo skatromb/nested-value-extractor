@@ -1,3 +1,4 @@
+---
 # Look docs here https://github.com/asottile/pyupgrade/blob/main/README.md
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
@@ -12,7 +13,13 @@ repos:
   - repo: https://github.com/igorshubovych/markdownlint-cli
     rev: v0.37.0
     hooks:
-    - id: markdownlint
+      - id: markdownlint
+
+  # YAML linter
+  - repo: https://github.com/adrienverge/yamllint.git
+    rev: v1.29.0
+    hooks:
+      - id: yamllint
 
   # Dockerfile linter
   - repo: https://github.com/hadolint/hadolint
