@@ -30,14 +30,14 @@ repos:
   # An extremely fast Python linter, written in Rust
   - repo: https://github.com/charliermarsh/ruff-pre-commit
     # Ruff version.
-    rev: v0.1.4
+    rev: v0.1.6
     hooks:
       - id: ruff
       - id: ruff-format
 
   # Mypy is a static type checker for Python
   - repo: https://github.com/pre-commit/mirrors-mypy
-    rev: v1.6.1
+    rev: v1.7.1
     hooks:
       - id: mypy
 
@@ -50,3 +50,9 @@ repos:
           - wemake-python-styleguide
           - flake8-pytest-style
           - flake8-aaa
+
+  # Seeks for unused code
+  - repo: https://github.com/jendrikseipp/vulture
+    rev: v2.10
+    hooks:
+      - id: vulture
