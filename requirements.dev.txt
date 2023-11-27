@@ -1,4 +1,5 @@
 build
 pytest
+pytest-randomly
 setuptools
 twine
