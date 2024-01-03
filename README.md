@@ -1,7 +1,7 @@
 # nested-value-extractor
 
 ```python
->>> extract_nested_value({1: {2: {3: "value"}}}, [1, 2, 3])
+>>> extract_nested_value({1: {2: "value"}}, [1, 2])
 "value"
 ```
 
@@ -21,11 +21,12 @@ Could throw a `KeyError` exception if `strict=True` is passed.
 ## Examples
 
 ```python
+
+>>> extract_nested_value({1: {2: "value"}}, [1, 2])
+"value"
+
 >>> extract_nested_value({1: 2}, [1])
 2
-
->>> extract_nested_value({1: {2: {3: "value"}}}, [1, 2, 3])
-"value"
 
 >>> extract_nested_value({1: 2}, ["a"])
 None
