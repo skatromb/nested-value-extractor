@@ -1,5 +1,5 @@
 """Tests for nested_value_extractor."""
-from collections.abc import Sequence
+from typing import Sequence
 
 import pytest
 

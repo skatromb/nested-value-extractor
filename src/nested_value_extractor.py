@@ -1,11 +1,17 @@
 """Extract a nested value from a json-like dictionary object."""
-from collections.abc import Sequence
-from typing import Optional, SupportsIndex, TypeGuard, get_args
+from typing import (
+    Hashable,
+    Optional,
+    Sequence,
+    SupportsIndex,
+    TypeGuard,
+    get_args,
+)
 
-Key = SupportsIndex
 # `Optional` stands for `null` values
 JSONValue = Optional[str | int | float | bool]
 NestedJSON = dict | list
+Key = Hashable | SupportsIndex
 KEY_ERROR_MSG = 'Keys sequence "{keys}" do not exists in object "{json_obj}"'
 
 
@@ -70,7 +76,7 @@ def _extract_or_stop(
     """
     if _is_nested(nested_obj):
         try:
-            return nested_obj[key]
+            return nested_obj[key]  # type: ignore[index]
         except (KeyError, TypeError):
             raise StopExtractionError()
 
