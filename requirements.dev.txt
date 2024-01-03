@@ -1,6 +1,5 @@
 # build
 build
-pip
 setuptools
 twine
 

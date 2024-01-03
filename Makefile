@@ -25,7 +25,6 @@ install-deps: venv
 	pip install --upgrade -r requirements.dev.txt
 build:
 	$(with_venv) && \
-	pip install --upgrade build twine && \
 	python -m build && \
 	cd src && \
 	ls | grep .egg-info | xargs rm -r
