@@ -5,9 +5,12 @@
 "value"
 ```
 
-To install lib from [pypi](pypi.org/project/nested-value-extractor/) do:
+To install lib from [pypi](htpps://pypi.org/project/nested-value-extractor/)
+do:
 
-```pip install nested-value-extractor```
+```shell
+pip install nested-value-extractor
+```
 
 Extracts a nested value from a JSON-like dict by specifying a sequence of keys.
 
