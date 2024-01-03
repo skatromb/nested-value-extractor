@@ -1,9 +1,13 @@
-# nested-value-extracor
+# nested-value-extractor
 
 ```python
 >>> extract_nested_value({1: {2: {3: "value"}}}, [1, 2, 3])
 "value"
 ```
+
+To install lib from [pypi](pypi.org/project/nested-value-extractor/) do:
+
+```pip install nested-value-extractor```
 
 Extracts a nested value from a JSON-like dict by specifying a sequence of keys.
 
