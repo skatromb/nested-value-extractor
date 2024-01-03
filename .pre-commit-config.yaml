@@ -1,3 +1,6 @@
+---
+exclude: ^.devcontainer/devcontainer.json$
+
 # Look docs here https://github.com/asottile/pyupgrade/blob/main/README.md
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
@@ -12,13 +15,13 @@ repos:
   - repo: https://github.com/igorshubovych/markdownlint-cli
     rev: v0.37.0
     hooks:
-    - id: markdownlint
+      - id: markdownlint
 
-  # Dockerfile linter
-  - repo: https://github.com/hadolint/hadolint
-    rev: v2.12.1-beta
+  # Markdown linter
+  - repo: https://github.com/adrienverge/yamllint
+    rev: v1.33.0
     hooks:
-      - id: hadolint-docker
+      - id: yamllint
 
   # An extremely fast Python linter, written in Rust
   - repo: https://github.com/charliermarsh/ruff-pre-commit
