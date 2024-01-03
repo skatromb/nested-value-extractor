@@ -11,6 +11,11 @@
 # Base flake8 configuration:
 # https://flake8.pycqa.org/en/latest/user/configuration.html
 
+require-plugins =
+  flake8-aaa
+  flake8-pytest-style
+  wemake-python-styleguide
+
 # Excluding some directories:
 exclude =
   .git
@@ -18,8 +23,11 @@ exclude =
   .venv
 
 # Exclude some pydoctest checks globally:
-ignore = RST301, W504, RST203
-;, RST303, RST304, DAR103, DAR203, D100, D104, D401,
+ignore =
+  DAR103,
+  RST203, RST301,
+  W504,
+;, RST303, RST304, DAR203, D100, D104, D401,
 
 per-file-ignores =
   tests/*.py: DAR101, S101
@@ -28,9 +36,3 @@ per-file-ignores =
 
 # Disable some pydoctest checks globally:
 ;doctests = True
-
-
-[isort]
-# isort configuration:
-# https://pycqa.github.io/isort/docs/configuration/profiles.html
-profile = wemake

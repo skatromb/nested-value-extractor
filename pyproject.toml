@@ -1,19 +1,45 @@
-[project]
+# Package build
+[tool.poetry]
 name = "nested-value-extractor"
 version = "0.2.0"
-authors = [{ name="Ivan Livadnyi", email="morales_lamb_0y@icloud.com" },]
+authors = ["Ivan Livadnyi <morales_lamb_0y@icloud.com>"]
+license = "MIT"
 description = "Extract nested value from json-like dict by providing sequence of keys"
 readme = "README.md"
-requires-python = ">=3.10"
-dependencies = []
+homepage = "https://github.com/skatromb/nested-dict-extractor"
+repository = "https://github.com/skatromb/nested-dict-extractor"
+documentation = "https://github.com/skatromb/nested-dict-extractor/README.md"
 classifiers = [
     "Programming Language :: Python :: 3",
     "Operating System :: OS Independent",
 ]
 
+[tool.poetry.dependencies]
+python = "^3.10"
+
 [build-system]
-requires = ["setuptools >= 68.2"]
-build-backend = "setuptools.build_meta"
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
 
 [project.urls]
-"Homepage" = "https://github.com/skatromb/nested-dict-extractor"
+
+# Tools
+[tool.ruff]
+fix = true
+line-length = 79
+
+[tool.rufflint]
+select = ['ALL']
+ignore = [
+    'CPY', 'FURB', 'LOG',  # preview hooks
+    'FA', 'D203', 'D212', 'D213', 'COM812', 'ISC001',  # conflicting rules
+    # our preferences
+    'D407', 'D415',
+]
+
+[tool.ruff.format]
+# Following standard Python guidelines, use single quotes for strings.
+quote-style = 'single'
+
+[tool.ruff.flake8-quotes]
+inline-quotes = 'single'
