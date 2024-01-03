@@ -53,15 +53,14 @@ def test_not_found_safe(
 
 @pytest.mark.parametrize('safe', [False])
 @pytest.mark.parametrize(
-    'json_obj, keys, expected_exception',
-    [(*args, pytest.raises(KeyError)) for args in NON_HAPPY_ARGS],
+    'json_obj, keys',
+    NON_HAPPY_ARGS,
 )
 def test_exceptions(
     json_obj: dict,
     keys: Sequence[Key],
     safe: bool,
-    expected_exception: pytest.ExceptionInfo,
 ):
     """Tests cases when keys sequence is not found and exception is thrown."""
-    with expected_exception:
+    with pytest.raises(KeyError):
         extract_nested_value(json_obj, keys, safe)
