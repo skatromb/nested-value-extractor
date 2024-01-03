@@ -1,5 +1,14 @@
+# build
 build
-pytest
-pytest-randomly
 setuptools
 twine
+
+# linters
+flake8-aaa
+flake8-pytest-style
+mypy
+wemake-python-styleguide
+
+# tests
+pytest
+pytest-randomly
