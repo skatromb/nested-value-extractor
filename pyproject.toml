@@ -43,3 +43,11 @@ quote-style = 'single'
 
 [tool.ruff.flake8-quotes]
 inline-quotes = 'single'
+
+[tool.vulture]
+paths = [
+    'src',
+    'tests',
+]
+
+exclude = ['.venv']
