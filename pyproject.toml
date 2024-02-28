@@ -26,7 +26,7 @@ build-backend = "poetry.core.masonry.api"
 # Tools
 [tool.ruff]
 fix = true
-line-length = 79
+line-length = 80
 
 [tool.rufflint]
 select = ['ALL']
